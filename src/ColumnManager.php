@@ -206,7 +206,12 @@ class ColumnManager
 
         $order = request('order');
 
-        $orderColumn = $requestedColumnNames[$order[0]['column']];
+         if(isset($order[0]['column'])){
+            $orderColumn = $requestedColumnNames[$order[0]['column']];
+        }else{
+            $orderColumn = 'id';
+        }
+
 
         if ($methodName = $this->hasCustomOrdering($orderColumn)) {
             $orderColumn = $this->class::$methodName();
